@@ -5,7 +5,8 @@ const {
     currentMovies,
     showsOfMovie,
     removeMovie,
-    searchMovie
+    searchMovie, 
+    getMovieCountByGenre
 } = require('../controllers/movie')
 const {
     getAllVouchers
@@ -20,7 +21,7 @@ router.get('/currentMovies', currentMovies)
 router.get('/showsOfMovie/:movieId', showsOfMovie)
 router.delete('/removeMovie', removeMovie)
 router.post('/searchMovie', searchMovie)
-
+router.get('/getMovieCountByGenre', getMovieCountByGenre);
 router.get('/getAllVouchers', getAllVouchers)
 
 router.use((err, req, res, next) => {

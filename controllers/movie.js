@@ -135,3 +135,24 @@ module.exports.removeMovie = async (req, res, next) => {
         next(err)
     }
 }
+
+// tính số lượng movie theo thể loại -> xuất ra theo thứ tự giảm dần
+module.exports.getMovieCountByGenre = async (req, res, next) => {
+    try {
+        const movieCounts = await Movie.aggregate([
+            { $unwind: "$Genre" },
+            { $group: {
+                _id: "$Genre",
+                count: { $sum: 1 } 
+            }},
+            { $sort: { count: -1 } } 
+        ]);
+
+        res.status(200).json({
+            status: true,
+            data: movieCounts
+        });
+    } catch (err) {
+        next(err);
+    }
+};
